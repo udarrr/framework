@@ -1,6 +1,7 @@
-package com.epam.aqa.service;
+package com.epam.aqa.services;
 
 import com.epam.aqa.model.EstimateForm;
+import com.epam.aqa.model.EstimateResult;
 
 public class EstimateDataCreator {
     private static final String QUANTITY_INSTANCES = "testdata.estimateform.quantityInstances";
@@ -14,19 +15,15 @@ public class EstimateDataCreator {
     private static final String DATA_CENTER_LOCATION_ID = "testdata.estimateform.dataCenterLocationID";
     private static final String COMMITTED_USAGE_ID = "testdata.estimateform.committedUsageID";
 
-    public static String vmClassField;
-    public static String instanceTypeField;
-    public static String regionField;
-    public static String localSSDField;
-    public static String commitmentTermField;
+    public static String VM_CLASS_FIELD = "testdata.estimateform.vmClassField";
+    public static String INSTANCES_TYPE_FIELD = "testdata.estimateform.instancesTypeField";
+    public static String LOCAL_SSD_FIELD = "testdata.estimateform.localSSDField";
+    public static String REGION_FIELD = "testdata.estimateform.regionField";
+    public static String COMMITMENT_TERM_FIELD = "testdata.estimateform.commitmentTermField";
 
-    private static String resultPriceAfterManualTest;
-    private static String resultPriceFromCalculator;
+    private static String resultPriceAfterManualTest = "testdata.estimateform.resultPriceAfterManualTest";
 
-    private static String descriptionPriceField;
-
-
-    public EstimateForm getEstimateFormData() {
+    public static EstimateForm getEstimateFormData() {
         EstimateForm estimateForm = new EstimateForm();
         estimateForm.setQuantityInstances(TestDataReader.getCommonData(QUANTITY_INSTANCES));
         estimateForm.setOperationSystemID(TestDataReader.getCommonData(OPERATION_SYSTEM_ID));
@@ -42,14 +39,14 @@ public class EstimateDataCreator {
         return estimateForm;
     }
 
-    public EstimateForm getEstimateResultFields() {
-        EstimateForm estimateForm = new EstimateForm();
-        public static String vmClassField;
-        public static String instanceTypeField;
-        public static String regionField;
-        public static String localSSDField;
-        public static String commitmentTermField;
+    public static EstimateResult getEstimateResultFields() {
+        EstimateResult estimateResult = new EstimateResult();
+        estimateResult.setVmClassField(TestDataReader.getCommonData(VM_CLASS_FIELD));
+        estimateResult.setInstanceTypeField(TestDataReader.getCommonData(INSTANCES_TYPE_FIELD));
+        estimateResult.setLocalSSDField(TestDataReader.getCommonData(LOCAL_SSD_FIELD));
+        estimateResult.setRegionField(TestDataReader.getCommonData(REGION_FIELD));
+        estimateResult.setCommitmentTermField(TestDataReader.getCommonData(COMMITMENT_TERM_FIELD));
 
-        return estimateForm;
+        return estimateResult;
     }
 }

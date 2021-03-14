@@ -3,7 +3,7 @@
 <suite name="Smoke" verbose="1" >
     <test name="PageAvailable" >
         <classes>
-            <class name="com.epam.aqa.tests.EstimateFormComputeEngineTests"/>
+            <class name="com.epam.aqa.tests.HomePagesAvailableTest"/>
         </classes>
     </test>
 </suite>

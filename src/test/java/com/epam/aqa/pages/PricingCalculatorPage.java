@@ -1,5 +1,7 @@
 package com.epam.aqa.pages;
 
+import com.epam.aqa.model.EstimateResult;
+import com.epam.aqa.model.ProgressData;
 import org.openqa.selenium.*;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
@@ -11,7 +13,6 @@ import java.util.Arrays;
 import java.util.List;
 
 public class PricingCalculatorPage extends AbstractPage{
-
     @FindBy(xpath = "//a[@class='gs-title']/b[text()='Google Cloud Platform Pricing Calculator']")
     private WebElement googleCalculatorLink;
 
@@ -63,7 +64,7 @@ public class PricingCalculatorPage extends AbstractPage{
     private WebElement buttonAddToEstimate;
 
     String partOfLocatorForPositionDropDownList = "//div[@class='md-select-menu-container md-active md-clickable']//md-option[@value='%s']";
-
+//    String partOfLocatorForPositionDropDownList = "//md-option[substring(@value, string-length(@value) - string-length('%s') +1) = '%s']";
     @FindBy(xpath = "//md-list[@class='cartitem ng-scope']/md-list-item/div")
     private List<WebElement> createdEstimate;
 
@@ -76,15 +77,15 @@ public class PricingCalculatorPage extends AbstractPage{
     @FindBy(xpath = "//button[@aria-label='Send Email']")
     private WebElement buttonSendEmail;
 
-
     @Override
     protected AbstractPage openPage() {
         return null;
     }
 
-    public PricingCalculatorPage(WebDriver driver) {
-        super(driver);
+    public PricingCalculatorPage(WebDriver driver, ProgressData progressData) {
+        super(driver, progressData);
         this.driver = driver;
+        this.progressData = progressData;
         PageFactory.initElements(driver, this);
     }
 
@@ -111,6 +112,8 @@ public class PricingCalculatorPage extends AbstractPage{
         driver.switchTo().frame(iFrameCalculatorAfterIFrame);
         tabComputerEngine.click();
 
+        logger.info("ComputerEngine form available");
+
         return this;
     }
 
@@ -121,10 +124,10 @@ public class PricingCalculatorPage extends AbstractPage{
         return this;
     }
 
-    public PricingCalculatorPage chooseOperationSystem(String operationSystem) {
+    public PricingCalculatorPage chooseOperationSystem(String condition) {
         inputContainerTypeOperationSystem.click();
 
-        String fullLocator = String.format(partOfLocatorPositionMenuTypeOperationSystem, operationSystem);
+        String fullLocator = String.format(partOfLocatorPositionMenuTypeOperationSystem, condition);
 
         WebElement position = waitBeforeChoosingMenuOption(fullLocator);
         position.click();
@@ -214,7 +217,7 @@ public class PricingCalculatorPage extends AbstractPage{
     public PricingCalculatorPage saveCalculatorTotalPriceResult() {
         for (WebElement price : createdEstimate) {
             if (price.getText().contains(DESCRIPTION_PRICE_FIELD)) {
-                currentPriceInCalculator = price.getText();
+                progressData.setCurrentPriceInCalculator(price.getText());
             }
         }
         return this;
@@ -224,6 +227,8 @@ public class PricingCalculatorPage extends AbstractPage{
         buttonEmailEstimate.click();
         new WebDriverWait(driver, WAIT_TIMEOUT_SECONDS).until(ExpectedConditions.visibilityOf(inputEmail));
 
+        logger.info("ComputerEngine form filled");
+
         return this;
     }
 
@@ -232,7 +237,7 @@ public class PricingCalculatorPage extends AbstractPage{
         ArrayList<String> tabs = new ArrayList<String>(driver.getWindowHandles());
         driver.switchTo().window(tabs.get(1));
 
-        return new TemporaryEmailHomePage(driver);
+        return new TemporaryEmailHomePage(driver, progressData);
     }
 
     public PricingCalculatorPage enterEmail() {
@@ -246,6 +251,8 @@ public class PricingCalculatorPage extends AbstractPage{
     public PricingCalculatorPage pressButtonSendEmail() {
         buttonSendEmail.click();
 
+        logger.info("Email sent");
+
         return this;
     }
 
@@ -253,7 +260,7 @@ public class PricingCalculatorPage extends AbstractPage{
         ArrayList<String> tabs = new ArrayList<String>(driver.getWindowHandles());
         driver.switchTo().window(tabs.get(1));
 
-        return new TemporaryEmailHomePage(driver);
+        return new TemporaryEmailHomePage(driver, progressData);
     }
 
     public boolean checkFieldsCreatedEstimateHasTheSameDataLikeInCalculator(String field1, String field2, String field3, String field4, String field5) {
@@ -286,17 +293,19 @@ public class PricingCalculatorPage extends AbstractPage{
     }
 
     private boolean findResultInFields(String line, String field) {
+        EstimateResult estimateResult = new EstimateResult();
+
         switch (field) {
             case "VM class":
-                return line.toLowerCase().endsWith(MachineClass.toLowerCase());
+                return line.toLowerCase().endsWith(estimateResult.getVmClassField().toLowerCase());
             case "Instance type":
-                return line.toLowerCase().endsWith(MachineType.N1_STANDART_8.getDescription().toLowerCase());
+                return line.toLowerCase().endsWith(estimateResult.getInstanceTypeField().toLowerCase());
             case "Region":
-                return line.toLowerCase().endsWith(DatacenterLocation.FRANKFURT.getDescription().toLowerCase());
+                return line.toLowerCase().endsWith(estimateResult.getRegionField().toLowerCase());
             case "local SSD":
-                return line.toLowerCase().endsWith(LocalSSD.X2_375.getDescription().toLowerCase());
+                return line.toLowerCase().endsWith(estimateResult.getLocalSSDField().toLowerCase());
             case "Commitment term":
-                return line.toLowerCase().endsWith(CommittedUsage.YEAR_1.getDescription().toLowerCase());
+                return line.toLowerCase().endsWith(estimateResult.getCommitmentTermField().toLowerCase());
             default:
                 return false;
         }

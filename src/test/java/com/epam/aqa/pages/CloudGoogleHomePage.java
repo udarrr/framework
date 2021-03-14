@@ -1,5 +1,6 @@
 package com.epam.aqa.pages;
 
+import com.epam.aqa.model.ProgressData;
 import com.epam.aqa.waits.CustomConditions;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
@@ -15,9 +16,10 @@ public class CloudGoogleHomePage extends AbstractPage {
     @FindBy(xpath = "//div[@class='devsite-searchbox']/input")
     private WebElement searchInput;
 
-    public CloudGoogleHomePage(WebDriver driver) {
-        super(driver);
+    public CloudGoogleHomePage(WebDriver driver, ProgressData progressData) {
+        super(driver, progressData);
         this.driver = driver;
+        this.progressData = progressData;
         PageFactory.initElements(driver, this);
     }
 
@@ -27,15 +29,19 @@ public class CloudGoogleHomePage extends AbstractPage {
         new WebDriverWait(driver, WAIT_TIMEOUT_SECONDS).withMessage("javascript didn't load")
                 .until(CustomConditions.jsLoadCompleted());
 
+        logger.info("Opened page https://cloud.google.com/");
+
         return this;
     }
 
-    public SearchingResultPage fillSearchInput(){
-        new WebDriverWait(driver,WAIT_TIMEOUT_SECONDS).until(ExpectedConditions.visibilityOf(searchInput));
+    public SearchingResultPage fillSearchInput() {
+        new WebDriverWait(driver, WAIT_TIMEOUT_SECONDS)
+                .until(ExpectedConditions.visibilityOf(searchInput));
+
         searchInput.click();
         searchInput.sendKeys("Google Cloud Platform Pricing Calculator");
         searchInput.sendKeys(Keys.ENTER);
 
-        return new SearchingResultPage(driver);
+        return new SearchingResultPage(driver, progressData);
     }
 }

@@ -91,15 +91,4 @@ public class EstimateForm {
     public void setCommittedUsageID(String committedUsageID) {
         this.committedUsageID = committedUsageID;
     }
-
-    private String resultPriceAfterManualTest;
-    private String resultPriceFromCalculator;
-    private String descriptionPriceField;
-    public String vmClassField;
-    public String instanceTypeField;
-    public String regionField;
-    public String localSSDField;
-    public String commitmentTermField;
-
-
 }

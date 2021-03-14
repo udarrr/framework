@@ -1,5 +1,6 @@
 package com.epam.aqa.pages;
 
+import com.epam.aqa.model.ProgressData;
 import com.epam.aqa.waits.CustomConditions;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -16,10 +17,10 @@ public class TemporaryEmailHomePage extends AbstractPage {
     @FindBy(id= "copy_address")
     private WebElement iconCopyEmail;
 
-    @FindBy(xpath = "//*[@id=\"mail_messages_content\"]//span[text()='Google Cloud Platform Price Estimate']")
+    @FindBy(xpath = "//*[@id='mail_messages_content']//span[text()='Google Cloud Platform Price Estimate']")
     private WebElement containerWithLetter;
 
-    @FindBy(xpath = "//*[@id=\"mobilepadding\"]//td[2]/h3")
+    @FindBy(xpath = "//*[@id='mobilepadding']//td[2]/h3")
     private WebElement fieldTotalPriceEstimateBill;
 
     @Override
@@ -32,9 +33,10 @@ public class TemporaryEmailHomePage extends AbstractPage {
         return this;
     }
 
-    public TemporaryEmailHomePage(WebDriver driver) {
-        super(driver);
+    public TemporaryEmailHomePage(WebDriver driver, ProgressData progressData) {
+        super(driver,progressData);
         this.driver = driver;
+        this.progressData = progressData;
         PageFactory.initElements(driver, this);
     }
 
@@ -48,7 +50,7 @@ public class TemporaryEmailHomePage extends AbstractPage {
         ArrayList<String> tabs = new ArrayList<String>(driver.getWindowHandles());
         driver.switchTo().window(tabs.get(0));
 
-        return new PricingCalculatorPage(driver);
+        return new PricingCalculatorPage(driver, progressData);
     }
 
     public TemporaryEmailHomePage checkLetterInTemporaryEmailBox(){
@@ -62,6 +64,6 @@ public class TemporaryEmailHomePage extends AbstractPage {
     public boolean compareCalculatorTotalPriceResultHasTheSamePriceLikeInTemporaryEmailLetter(){
         String priceInEmail = fieldTotalPriceEstimateBill.getText();
 
-        return currentPriceInCalculator.contains(priceInEmail);
+        return progressData.getCurrentPriceInCalculator().contains(priceInEmail);
     }
 }
