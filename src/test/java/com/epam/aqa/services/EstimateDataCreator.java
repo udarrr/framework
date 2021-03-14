@@ -4,24 +4,24 @@ import com.epam.aqa.models.EstimateForm;
 import com.epam.aqa.models.EstimateResult;
 
 public class EstimateDataCreator {
-    private static final String QUANTITY_INSTANCES = "testdata.estimateform.quantityInstances";
-    private static final String OPERATION_SYSTEM_ID = "testdata.estimateform.operationSystemID";
-    private static final String MACHINE_CLASS_ID = "testdata.estimateform.machineClassID";
-    private static final String SERIES_ID = "testdata.estimateform.seriesID";
-    private static final String MACHINE_TYPE_ID = "testdata.estimateform.machineTypeID";
-    private static final String GPU_QUANTITY_ID = "testdata.estimateform.gpuQuantityID";
-    private static final String GPU_TYPE_ID = "testdata.estimateform.gpuTypeID";
-    private static final String LOCALSSD_ID = "testdata.estimateform.localSSDID";
-    private static final String DATA_CENTER_LOCATION_ID = "testdata.estimateform.dataCenterLocationID";
-    private static final String COMMITTED_USAGE_ID = "testdata.estimateform.committedUsageID";
+    private static final String QUANTITY_INSTANCES = "testdata.computerEngineForm.quantityInstances";
+    private static final String OPERATION_SYSTEM_ID = "testdata.computerEngineForm.operationSystemID";
+    private static final String MACHINE_CLASS_ID = "testdata.computerEngineForm.machineClassID";
+    private static final String SERIES_ID = "testdata.computerEngineForm.seriesID";
+    private static final String MACHINE_TYPE_ID = "testdata.computerEngineForm.machineTypeID";
+    private static final String GPU_QUANTITY_ID = "testdata.computerEngineForm.gpuQuantityID";
+    private static final String GPU_TYPE_ID = "testdata.computerEngineForm.gpuTypeID";
+    private static final String LOCALSSD_ID = "testdata.computerEngineForm.localSSDID";
+    private static final String DATA_CENTER_LOCATION_ID = "testdata.computerEngineForm.dataCenterLocationID";
+    private static final String COMMITTED_USAGE_ID = "testdata.computerEngineForm.committedUsageID";
 
-    public static String VM_CLASS_FIELD = "testdata.estimateform.vmClassField";
-    public static String INSTANCES_TYPE_FIELD = "testdata.estimateform.instancesTypeField";
-    public static String LOCAL_SSD_FIELD = "testdata.estimateform.localSSDField";
-    public static String REGION_FIELD = "testdata.estimateform.regionField";
-    public static String COMMITMENT_TERM_FIELD = "testdata.estimateform.commitmentTermField";
+    public static String VM_CLASS_FIELD = "testdata.computerEngineForm.vmClassField";
+    public static String INSTANCES_TYPE_FIELD = "testdata.computerEngineForm.instancesTypeField";
+    public static String LOCAL_SSD_FIELD = "testdata.computerEngineForm.localSSDField";
+    public static String REGION_FIELD = "testdata.computerEngineForm.regionField";
+    public static String COMMITMENT_TERM_FIELD = "testdata.computerEngineForm.commitmentTermField";
 
-    private static String resultPriceAfterManualTest = "testdata.estimateform.resultPriceAfterManualTest";
+    private static String resultPriceAfterManualTest = "testdata.computerEngineForm.resultPriceAfterManualTest";
 
     public static EstimateForm getEstimateFormData() {
         EstimateForm estimateForm = new EstimateForm();

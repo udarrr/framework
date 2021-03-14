@@ -43,6 +43,8 @@ public class TemporaryEmailHomePage extends AbstractPage {
     public TemporaryEmailHomePage copyTemporaryEmail() {
         iconCopyEmail.click();
 
+        logger.info("Email copied");
+
         return this;
     }
 

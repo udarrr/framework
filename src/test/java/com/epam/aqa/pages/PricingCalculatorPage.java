@@ -2,6 +2,7 @@ package com.epam.aqa.pages;
 
 import com.epam.aqa.models.EstimateResult;
 import com.epam.aqa.models.ProgressData;
+import io.github.bonigarcia.wdm.WebDriverManager;
 import org.openqa.selenium.*;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
@@ -64,7 +65,7 @@ public class PricingCalculatorPage extends AbstractPage {
     private WebElement buttonAddToEstimate;
 
     String partOfLocatorForPositionDropDownList = "//div[@class='md-select-menu-container md-active md-clickable']//md-option[@value='%s']";
-    //    String partOfLocatorForPositionDropDownList = "//md-option[substring(@value, string-length(@value) - string-length('%s') +1) = '%s']";
+
     @FindBy(xpath = "//md-list[@class='cartitem ng-scope']/md-list-item/div")
     private List<WebElement> createdEstimate;
 
@@ -168,12 +169,13 @@ public class PricingCalculatorPage extends AbstractPage {
         new WebDriverWait(driver, WAIT_TIMEOUT_SECONDS)
                 .until(ExpectedConditions.visibilityOf(inputContainerGPUNumber));
 
-        inputContainerGPUNumber.click();
+        inputContainerGPUNumber.sendKeys(Keys.RETURN);
 
         WebElement positionNumber = buildFullLocatorForPositionMenu(number);
         positionNumber.click();
 
-        inputContainerGPUType.click();
+        inputContainerGPUType.sendKeys(Keys.RETURN);
+
 
         WebElement positionType = buildFullLocatorForPositionMenu(type);
         positionType.click();
@@ -182,7 +184,7 @@ public class PricingCalculatorPage extends AbstractPage {
     }
 
     public PricingCalculatorPage chooseLocalSSD(String count) {
-        inputContainerLocalSSD.click();
+        inputContainerLocalSSD.sendKeys(Keys.RETURN);
 
         WebElement position = buildFullLocatorForPositionMenu(count);
         position.click();
@@ -191,7 +193,7 @@ public class PricingCalculatorPage extends AbstractPage {
     }
 
     public PricingCalculatorPage chooseDataCenterLocation(String location) {
-        inputContainerDataCenterLocation.click();
+        inputContainerDataCenterLocation.sendKeys(Keys.RETURN);
 
         WebElement position = buildFullLocatorForPositionMenu(location);
         position.click();
@@ -200,7 +202,7 @@ public class PricingCalculatorPage extends AbstractPage {
     }
 
     public PricingCalculatorPage chooseCommittedUsage(String period) {
-        inputContainerCommittedUsage.click();
+        inputContainerCommittedUsage.sendKeys(Keys.RETURN);
 
         WebElement position = buildFullLocatorForPositionMenu(period);
         position.click();
@@ -244,6 +246,8 @@ public class PricingCalculatorPage extends AbstractPage {
         driver.switchTo().frame(iFrame);
         driver.switchTo().frame(iFrameCalculatorAfterIFrame);
         inputEmail.sendKeys(Keys.LEFT_CONTROL, "v");
+
+        logger.info("Email wrote down");
 
         return this;
     }

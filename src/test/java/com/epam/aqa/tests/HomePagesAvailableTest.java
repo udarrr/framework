@@ -5,7 +5,7 @@ import org.testng.Assert;
 import org.testng.annotations.Test;
 
 public class HomePagesAvailableTest {
-    @Test(description = "smoke")
+    @Test(description = "Smoke")
     public void checkAvailableCloudPage() {
         String CLOUD_HOME_PAGE_URL = "cloud.google.com";
         boolean expectedPagesAvailable = new PingUtils().pingHomePages(CLOUD_HOME_PAGE_URL, 80, 5000);
