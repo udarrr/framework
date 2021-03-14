@@ -1,6 +1,6 @@
 package com.epam.aqa.pages;
 
-import com.epam.aqa.model.ProgressData;
+import com.epam.aqa.models.ProgressData;
 import com.epam.aqa.waits.CustomConditions;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;

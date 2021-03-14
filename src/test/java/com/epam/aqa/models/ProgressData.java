@@ -1,4 +1,4 @@
-package com.epam.aqa.model;
+package com.epam.aqa.models;
 
 public class ProgressData {
     protected String currentPriceInCalculator;

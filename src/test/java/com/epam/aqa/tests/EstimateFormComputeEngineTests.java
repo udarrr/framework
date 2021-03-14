@@ -1,7 +1,7 @@
 package com.epam.aqa.tests;
 
-import com.epam.aqa.model.EstimateForm;
-import com.epam.aqa.model.ProgressData;
+import com.epam.aqa.models.EstimateForm;
+import com.epam.aqa.models.ProgressData;
 import com.epam.aqa.pages.CloudGoogleHomePage;
 import com.epam.aqa.services.EstimateDataCreator;
 import org.testng.Assert;

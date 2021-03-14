@@ -1,7 +1,7 @@
 package com.epam.aqa.pages;
 
-import com.epam.aqa.model.EstimateResult;
-import com.epam.aqa.model.ProgressData;
+import com.epam.aqa.models.EstimateResult;
+import com.epam.aqa.models.ProgressData;
 import org.openqa.selenium.*;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
@@ -12,7 +12,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-public class PricingCalculatorPage extends AbstractPage{
+public class PricingCalculatorPage extends AbstractPage {
     @FindBy(xpath = "//a[@class='gs-title']/b[text()='Google Cloud Platform Pricing Calculator']")
     private WebElement googleCalculatorLink;
 
@@ -64,7 +64,7 @@ public class PricingCalculatorPage extends AbstractPage{
     private WebElement buttonAddToEstimate;
 
     String partOfLocatorForPositionDropDownList = "//div[@class='md-select-menu-container md-active md-clickable']//md-option[@value='%s']";
-//    String partOfLocatorForPositionDropDownList = "//md-option[substring(@value, string-length(@value) - string-length('%s') +1) = '%s']";
+    //    String partOfLocatorForPositionDropDownList = "//md-option[substring(@value, string-length(@value) - string-length('%s') +1) = '%s']";
     @FindBy(xpath = "//md-list[@class='cartitem ng-scope']/md-list-item/div")
     private List<WebElement> createdEstimate;
 

@@ -1,7 +1,7 @@
 package com.epam.aqa.services;
 
-import com.epam.aqa.model.EstimateForm;
-import com.epam.aqa.model.EstimateResult;
+import com.epam.aqa.models.EstimateForm;
+import com.epam.aqa.models.EstimateResult;
 
 public class EstimateDataCreator {
     private static final String QUANTITY_INSTANCES = "testdata.estimateform.quantityInstances";

@@ -1,6 +1,6 @@
 package com.epam.aqa.tests;
 
-import com.epam.aqa.driver.DriverSingleton;
+import com.epam.aqa.drivers.DriverSingleton;
 import com.epam.aqa.utils.TestListener;
 import org.openqa.selenium.WebDriver;
 import org.testng.annotations.AfterMethod;

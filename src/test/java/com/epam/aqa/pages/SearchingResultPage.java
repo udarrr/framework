@@ -1,6 +1,6 @@
 package com.epam.aqa.pages;
 
-import com.epam.aqa.model.ProgressData;
+import com.epam.aqa.models.ProgressData;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
