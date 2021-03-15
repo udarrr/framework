@@ -1,7 +1,6 @@
 package com.epam.aqa.drivers;
 
 import io.github.bonigarcia.wdm.WebDriverManager;
-import org.openqa.selenium.Dimension;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
@@ -18,17 +17,29 @@ public class DriverSingleton {
             switch (System.getProperty("browser")) {
                 case "firefox": {
                     WebDriverManager.firefoxdriver().setup();
-                    driver = new FirefoxDriver();
+                    if(System.getProperty("mode").equals("headless")){
+                        driver = new FirefoxDriver(new FirefoxOptions().addArguments("--headless --window-size=1920,1080"));
+                    } else {
+                        driver = new FirefoxDriver();
+                    }
                     break;
                 }
                 case "edge": {
                     WebDriverManager.edgedriver().setup();
-                    driver = new EdgeDriver();
+                    if(System.getProperty("mode").equals("headless")){
+                        driver = new EdgeDriver(new EdgeOptions().addArguments("--headless --window-size=1920,1080"));
+                    } else {
+                        driver = new EdgeDriver();
+                    }
                     break;
                 }
                 default: {
                     WebDriverManager.chromedriver().setup();
-                    driver = new ChromeDriver(new ChromeOptions().addArguments("--headless --window-size=1920,1080"));
+                    if(System.getProperty("mode").equals("headless")){
+                        driver = new ChromeDriver(new ChromeOptions().addArguments("--headless --window-size=1920,1080"));
+                    } else {
+                        driver = new ChromeDriver();
+                    }
                 }
             }
             driver.manage().window().maximize();
