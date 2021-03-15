@@ -1,8 +1,10 @@
 package com.epam.aqa.drivers;
 
 import io.github.bonigarcia.wdm.WebDriverManager;
+import org.openqa.selenium.Dimension;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 
@@ -24,7 +26,7 @@ public class DriverSingleton {
                 }
                 default: {
                     WebDriverManager.chromedriver().setup();
-                    driver = new ChromeDriver();
+                    driver = new ChromeDriver(new ChromeOptions().addArguments("--headless --window-size=1920,1080"));
                 }
             }
             driver.manage().window().maximize();
