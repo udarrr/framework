@@ -18,20 +18,17 @@ public class DriverSingleton {
             switch (System.getProperty("browser")) {
                 case "firefox": {
                     WebDriverManager.firefoxdriver().setup();
-                    driver = new FirefoxDriver(new FirefoxOptions().setHeadless(true));
-                    driver.manage().window().setSize(new Dimension(1920, 1080));
+                    driver = new FirefoxDriver();
                     break;
                 }
                 case "edge": {
                     WebDriverManager.edgedriver().setup();
                     driver = new EdgeDriver();
-                    driver.manage().window().setSize(new Dimension(1920, 1080));
                     break;
                 }
                 default: {
                     WebDriverManager.chromedriver().setup();
-                    driver = new ChromeDriver(new ChromeOptions().setHeadless(true));
-                    driver.manage().window().setSize(new Dimension(1920, 1080));
+                    driver = new ChromeDriver(new ChromeOptions().addArguments("--headless --window-size=1920,1080"));
                 }
             }
             driver.manage().window().maximize();
