@@ -41,6 +41,7 @@ public class TemporaryEmailHomePage extends AbstractPage {
     }
 
     public TemporaryEmailHomePage copyTemporaryEmail() {
+        new WebDriverWait(driver,WAIT_TIMEOUT_SECONDS).until(ExpectedConditions.visibilityOf(iconCopyEmail));
         iconCopyEmail.click();
 
         logger.info("Email copied");
