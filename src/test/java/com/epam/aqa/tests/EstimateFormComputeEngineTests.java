@@ -3,6 +3,7 @@ package com.epam.aqa.tests;
 import com.epam.aqa.models.EstimateForm;
 import com.epam.aqa.models.ProgressData;
 import com.epam.aqa.pages.CloudGoogleHomePage;
+import com.epam.aqa.pages.TemporaryEmailHomePage;
 import com.epam.aqa.services.EstimateDataCreator;
 import org.testng.Assert;
 import org.testng.annotations.Test;
@@ -13,7 +14,7 @@ public class EstimateFormComputeEngineTests extends CommonConditions {
         EstimateForm estimateForm = EstimateDataCreator.getEstimateFormData();
         ProgressData progressData = new ProgressData();
 
-        boolean expectedPriceInCalculatorLikeInEmail = new CloudGoogleHomePage(driver, progressData)
+        boolean expectedPriceInCalculatorLikeInEmail = new CloudGoogleHomePage(driver, progressData, executor)
                 .openPage()
                 .fillSearchInput()
                 .openPage()
@@ -42,5 +43,4 @@ public class EstimateFormComputeEngineTests extends CommonConditions {
 
         Assert.assertTrue(expectedPriceInCalculatorLikeInEmail, "Price in letter don't have the same value like in calculator");
     }
-
 }

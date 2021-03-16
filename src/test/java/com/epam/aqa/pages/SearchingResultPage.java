@@ -1,6 +1,7 @@
 package com.epam.aqa.pages;
 
 import com.epam.aqa.models.ProgressData;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -19,13 +20,14 @@ public class SearchingResultPage extends AbstractPage {
 
         googleCalculatorLink.click();
 
-        return new PricingCalculatorPage(driver, progressData);
+        return new PricingCalculatorPage(driver, progressData,executor);
     }
 
-    public SearchingResultPage(WebDriver driver, ProgressData progressData) {
-        super(driver, progressData);
+    public SearchingResultPage(WebDriver driver, ProgressData progressData, JavascriptExecutor executor) {
+        super(driver, progressData,executor);
         this.driver = driver;
         this.progressData = progressData;
+        this.executor = executor;
         PageFactory.initElements(driver, this);
     }
 }

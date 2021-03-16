@@ -10,7 +10,7 @@ public class CustomConditions {
             @Override
             public Boolean apply(WebDriver webDriver) {
                 return (Boolean) ((JavascriptExecutor) webDriver)
-                        .executeScript("return (window.jQuery != null) && (jQuery.active === 0);");
+                        .executeScript("return (document.readyState == 'complete' && jQuery.active == 0 && window.jQuery != null)");
             }
         };
     }
@@ -21,6 +21,16 @@ public class CustomConditions {
             public Boolean apply(WebDriver webDriver) {
                 return (Boolean) ((JavascriptExecutor) webDriver)
                         .executeScript("return document.readyState").toString().equals("complete");
+            }
+        };
+    }
+
+    public static ExpectedCondition<Boolean> inputEmailJQueryLoadCompleted() {
+        return new ExpectedCondition<Boolean>() {
+            @Override
+            public Boolean apply(WebDriver webDriver) {
+                return (Boolean) ((JavascriptExecutor) webDriver)
+                        .executeScript("return document.querySelector('#mail_address').value.length != 0");
             }
         };
     }

@@ -2,6 +2,7 @@ package com.epam.aqa.pages;
 
 import com.epam.aqa.models.ProgressData;
 import com.epam.aqa.waits.CustomConditions;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -16,10 +17,11 @@ public class CloudGoogleHomePage extends AbstractPage {
     @FindBy(xpath = "//div[@class='devsite-searchbox']/input")
     private WebElement searchInput;
 
-    public CloudGoogleHomePage(WebDriver driver, ProgressData progressData) {
-        super(driver, progressData);
+    public CloudGoogleHomePage(WebDriver driver, ProgressData progressData, JavascriptExecutor executor) {
+        super(driver, progressData, executor);
         this.driver = driver;
         this.progressData = progressData;
+        this.executor = executor;
         PageFactory.initElements(driver, this);
     }
 
@@ -42,6 +44,6 @@ public class CloudGoogleHomePage extends AbstractPage {
         searchInput.sendKeys("Google Cloud Platform Pricing Calculator");
         searchInput.sendKeys(Keys.ENTER);
 
-        return new SearchingResultPage(driver, progressData);
+        return new SearchingResultPage(driver, progressData, executor);
     }
 }
