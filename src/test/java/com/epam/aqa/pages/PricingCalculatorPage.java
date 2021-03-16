@@ -276,7 +276,6 @@ public class PricingCalculatorPage extends AbstractPage {
     }
 
     public PricingCalculatorPage pressButtonSendEmail() {
-        waitBeforeChoosingMenuOption(buttonSendEmail);
         clickDependOnBrowser(buttonSendEmail);
 
         logger.info("Email sent");
