@@ -21,10 +21,11 @@ public class EstimateDataCreator {
     public static String REGION_FIELD = "testdata.computerEngineForm.regionField";
     public static String COMMITMENT_TERM_FIELD = "testdata.computerEngineForm.commitmentTermField";
 
-    private static String resultPriceAfterManualTest = "testdata.computerEngineForm.resultPriceAfterManualTest";
+    private static final String resultPriceAfterManualTest = "testdata.computerEngineForm.resultPriceAfterManualTest";
 
     public static EstimateForm getEstimateFormData() {
         EstimateForm estimateForm = new EstimateForm();
+
         estimateForm.setQuantityInstances(TestDataReader.getCommonData(QUANTITY_INSTANCES));
         estimateForm.setOperationSystemID(TestDataReader.getCommonData(OPERATION_SYSTEM_ID));
         estimateForm.setMachineClassID(TestDataReader.getCommonData(MACHINE_CLASS_ID));
@@ -41,6 +42,7 @@ public class EstimateDataCreator {
 
     public static EstimateResult getEstimateResultFields() {
         EstimateResult estimateResult = new EstimateResult();
+
         estimateResult.setVmClassField(TestDataReader.getCommonData(VM_CLASS_FIELD));
         estimateResult.setInstanceTypeField(TestDataReader.getCommonData(INSTANCES_TYPE_FIELD));
         estimateResult.setLocalSSDField(TestDataReader.getCommonData(LOCAL_SSD_FIELD));

@@ -1,22 +1,16 @@
 package com.epam.aqa.pages;
 
-import com.epam.aqa.models.ProgressData;
+import com.epam.aqa.models.ProcessData;
 import com.epam.aqa.waits.CustomConditions;
-import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-import java.awt.*;
-import java.awt.datatransfer.DataFlavor;
-import java.awt.datatransfer.UnsupportedFlavorException;
-import java.io.IOException;
 import java.time.Duration;
 import java.util.ArrayList;
 
@@ -48,10 +42,10 @@ public class TemporaryEmailHomePage extends AbstractPage {
         return this;
     }
 
-    public TemporaryEmailHomePage(WebDriver driver, ProgressData progressData, JavascriptExecutor executor) {
-        super(driver, progressData, executor);
+    public TemporaryEmailHomePage(WebDriver driver, ProcessData processData, JavascriptExecutor executor) {
+        super(driver, processData, executor);
         this.driver = driver;
-        this.progressData = progressData;
+        this.processData = processData;
         this.executor = executor;
         PageFactory.initElements(driver, this);
     }
@@ -59,8 +53,9 @@ public class TemporaryEmailHomePage extends AbstractPage {
     public TemporaryEmailHomePage copyTemporaryEmail() {
         if (browserName.equals("firefox")) {
             new WebDriverWait(driver,Duration.ofSeconds(WAIT_TIMEOUT_SECONDS)).until(CustomConditions.inputEmailJQueryLoadCompleted());
+
             String temporaryEmail = (String) executor.executeScript("return document.querySelector('#mail_address').value");
-            progressData.setCurrentEmail(temporaryEmail);
+            processData.setCurrentEmail(temporaryEmail);
         } else {
             iconCopyEmail.click();
         }
@@ -74,7 +69,7 @@ public class TemporaryEmailHomePage extends AbstractPage {
         ArrayList<String> tabs = new ArrayList<String>(driver.getWindowHandles());
         driver.switchTo().window(tabs.get(0));
 
-        return new PricingCalculatorPage(driver, progressData, executor);
+        return new PricingCalculatorPage(driver, processData, executor);
     }
 
     public TemporaryEmailHomePage checkLetterInTemporaryEmailBox() {
@@ -89,6 +84,6 @@ public class TemporaryEmailHomePage extends AbstractPage {
     public boolean compareCalculatorTotalPriceResultHasTheSamePriceLikeInTemporaryEmailLetter() {
         String priceInEmail = fieldTotalPriceEstimateBill.getText();
 
-        return progressData.getCurrentPriceInCalculator().contains(priceInEmail);
+        return processData.getCurrentPriceInCalculator().contains(priceInEmail);
     }
 }

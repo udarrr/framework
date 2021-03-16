@@ -1,7 +1,7 @@
 package com.epam.aqa.tests;
 
 import com.epam.aqa.models.EstimateForm;
-import com.epam.aqa.models.ProgressData;
+import com.epam.aqa.models.ProcessData;
 import com.epam.aqa.pages.CloudGoogleHomePage;
 import com.epam.aqa.services.EstimateDataCreator;
 import org.testng.Assert;
@@ -11,9 +11,8 @@ public class EstimateFormComputeEngineTests extends CommonConditions {
     @Test(description = "Hardcore")
     public void createEstimateAndComparePriceCalculatorWithSentByEmail() {
         EstimateForm estimateForm = EstimateDataCreator.getEstimateFormData();
-        ProgressData progressData = new ProgressData();
 
-        boolean expectedPriceInCalculatorLikeInEmail = new CloudGoogleHomePage(driver, progressData, executor)
+        boolean expectedPriceInCalculatorLikeInEmail = new CloudGoogleHomePage(driver, processData, executor)
                 .openPage()
                 .fillSearchInput()
                 .openPage()
