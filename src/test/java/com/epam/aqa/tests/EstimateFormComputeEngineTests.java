@@ -3,7 +3,6 @@ package com.epam.aqa.tests;
 import com.epam.aqa.models.EstimateForm;
 import com.epam.aqa.models.ProgressData;
 import com.epam.aqa.pages.CloudGoogleHomePage;
-import com.epam.aqa.pages.TemporaryEmailHomePage;
 import com.epam.aqa.services.EstimateDataCreator;
 import org.testng.Assert;
 import org.testng.annotations.Test;
