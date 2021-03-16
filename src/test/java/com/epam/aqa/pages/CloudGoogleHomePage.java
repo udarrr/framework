@@ -44,7 +44,7 @@ public class CloudGoogleHomePage extends AbstractPage {
                 .until(ExpectedConditions.visibilityOf(searchInput));
 
         searchInput.click();
-        searchInput.sendKeys();
+        searchInput.sendKeys(SEARCHING_INFO);
         searchInput.sendKeys(Keys.ENTER);
 
         logger.info("Looking for " + SEARCHING_INFO);
