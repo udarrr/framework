@@ -15,7 +15,7 @@ public abstract class AbstractPage {
     protected abstract AbstractPage openPage();
 
     protected final int WAIT_TIMEOUT_SECONDS = 25;
-    protected final int WAIT_TIMEOUT_SLEEP = 5;
+    protected final int TIMEOUT_SLEEP = 5;
 
     protected AbstractPage(WebDriver driver, ProcessData processData, JavascriptExecutor executor) {
         this.driver = driver;

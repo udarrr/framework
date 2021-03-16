@@ -29,8 +29,6 @@ public class TemporaryEmailHomePage extends AbstractPage {
     @FindBy(id = "mail_address")
     private WebElement inputEmailAddress;
 
-    String browserName = ((RemoteWebDriver) driver).getCapabilities().getBrowserName().toLowerCase();
-
     @Override
     public TemporaryEmailHomePage openPage() {
         driver.get(HOME_PAGE_URL);
@@ -51,7 +49,7 @@ public class TemporaryEmailHomePage extends AbstractPage {
     }
 
     public TemporaryEmailHomePage copyTemporaryEmail() {
-        if (browserName.equals("firefox")) {
+        if (processData.getCurrentBrowser().equals("firefox")) {
             new WebDriverWait(driver,Duration.ofSeconds(WAIT_TIMEOUT_SECONDS)).until(CustomConditions.inputEmailJQueryLoadCompleted());
 
             String temporaryEmail = (String) executor.executeScript("return document.querySelector('#mail_address').value");
@@ -66,7 +64,7 @@ public class TemporaryEmailHomePage extends AbstractPage {
     }
 
     public PricingCalculatorPage comeBackToCalculator() {
-        ArrayList<String> tabs = new ArrayList<String>(driver.getWindowHandles());
+        ArrayList<String> tabs = new ArrayList<>(driver.getWindowHandles());
         driver.switchTo().window(tabs.get(0));
 
         return new PricingCalculatorPage(driver, processData, executor);
