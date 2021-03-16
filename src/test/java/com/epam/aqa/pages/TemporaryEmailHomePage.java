@@ -16,6 +16,7 @@ import java.util.ArrayList;
 
 public class TemporaryEmailHomePage extends AbstractPage {
     private String HOME_PAGE_URL = "https://10minutemail.com";
+    private final int WAIT_EMAIL_TIMEOUT_SECONDS = 30;
 
     @FindBy(xpath = "//*[@class='copy_icon']")
     private WebElement iconCopyEmail;
@@ -71,7 +72,7 @@ public class TemporaryEmailHomePage extends AbstractPage {
     }
 
     public TemporaryEmailHomePage checkLetterInTemporaryEmailBox() {
-        new WebDriverWait(driver, Duration.ofSeconds(WAIT_TIMEOUT_SECONDS))
+        new WebDriverWait(driver, Duration.ofSeconds(WAIT_EMAIL_TIMEOUT_SECONDS))
                 .until(ExpectedConditions.visibilityOf(containerWithLetter));
 
         containerWithLetter.click();
