@@ -13,15 +13,13 @@ public class DriverSingleton {
     private static WebDriver driver;
 
     public static WebDriver getDriver() {
-        if (null == driver) {
+        if (driver == null) {
             switch (System.getProperty("browser")) {
                 case "firefox": {
                     WebDriverManager.firefoxdriver().setup();
+
                     if (System.getProperty("mode").equals("headless")) {
-                        FirefoxOptions options = new FirefoxOptions();
-                        options.addArguments("--headless");
-                        options.addArguments("--window-size=1920,1080");
-                        driver = new FirefoxDriver(options);
+                        driver = new FirefoxDriver(new FirefoxOptions().addArguments("--headless" , "--window-size=1920,1080"));
                     } else {
                         driver = new FirefoxDriver();
                     }
@@ -29,8 +27,9 @@ public class DriverSingleton {
                 }
                 case "edge": {
                     WebDriverManager.edgedriver().setup();
+
                     if (System.getProperty("mode").equals("headless")) {
-                        driver = new EdgeDriver(new EdgeOptions().addArguments("--headless --window-size=1920,1080"));
+                        driver = new EdgeDriver(new EdgeOptions().addArguments("--headless" , "--window-size=1920,1080"));
                     } else {
                         driver = new EdgeDriver();
                     }
@@ -38,8 +37,9 @@ public class DriverSingleton {
                 }
                 default: {
                     WebDriverManager.chromedriver().setup();
+
                     if (System.getProperty("mode").equals("headless")) {
-                        driver = new ChromeDriver(new ChromeOptions().addArguments("--headless --window-size=1920,1080"));
+                        driver = new ChromeDriver(new ChromeOptions().addArguments("--headless" , "--window-size=1920,1080"));
                     } else {
                         driver = new ChromeDriver();
                     }

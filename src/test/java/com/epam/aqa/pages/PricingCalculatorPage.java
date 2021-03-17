@@ -5,7 +5,6 @@ import com.epam.aqa.models.ProcessData;
 import com.epam.aqa.waits.CustomConditions;
 import org.openqa.selenium.*;
 import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
@@ -15,6 +14,8 @@ import java.util.Arrays;
 import java.util.List;
 
 public class PricingCalculatorPage extends AbstractPage {
+    private static final String locatorDefineInstanceForm = "//h2[contains(text(),'Instances')]/..";
+
     @FindBy(xpath = "//a[@class='gs-title']/b[text()='Google Cloud Platform Pricing Calculator']")
     private WebElement googleCalculatorLink;
 
@@ -42,13 +43,13 @@ public class PricingCalculatorPage extends AbstractPage {
     @FindBy(id = "select_92")
     private WebElement inputContainerMachineType;
 
-    @FindBy(xpath = "//h2[contains(text(),'Instances')]/..//md-checkbox[@aria-label='Add GPUs']")
+    @FindBy(xpath = "//md-checkbox[@aria-label='Add GPUs']")
     private WebElement checkBoxAddGPU;
 
-    @FindBy(xpath = "//h2[contains(text(),'Instances')]/..//md-select[@placeholder='Number of GPUs']")
+    @FindBy(xpath = locatorDefineInstanceForm + "//md-select[@placeholder='Number of GPUs']")
     private WebElement inputContainerGPUNumber;
 
-    @FindBy(xpath = "//h2[contains(text(),'Instances')]/..//md-select[@placeholder='GPU type']")
+    @FindBy(xpath = locatorDefineInstanceForm + "//md-select[@placeholder='GPU type']")
     private WebElement inputContainerGPUType;
 
     @FindBy(id = "select_357")
@@ -60,7 +61,7 @@ public class PricingCalculatorPage extends AbstractPage {
     @FindBy(id = "select_101")
     private WebElement inputContainerCommittedUsage;
 
-    @FindBy(xpath = "//h2[contains(text(),'Instances')]/..//button[@aria-label='Add to Estimate']")
+    @FindBy(xpath = locatorDefineInstanceForm + "//button[@aria-label='Add to Estimate']")
     private WebElement buttonAddToEstimate;
 
     @FindBy(xpath = "//md-list[@class='cartitem ng-scope']/md-list-item/div")
@@ -80,12 +81,8 @@ public class PricingCalculatorPage extends AbstractPage {
 
     private final String DESCRIPTION_PRICE_FIELD = "Estimated Component Cost";
 
-    public PricingCalculatorPage(WebDriver driver, ProcessData processData, JavascriptExecutor executor) {
-        super(driver, processData, executor);
-        this.driver = driver;
-        this.processData = processData;
-        this.executor = executor;
-        PageFactory.initElements(driver, this);
+    public PricingCalculatorPage(WebDriver driver, ProcessData processData) {
+        super(driver, processData);
     }
 
     @Override
@@ -117,6 +114,8 @@ public class PricingCalculatorPage extends AbstractPage {
 
         return this;
     }
+
+    private final JavascriptExecutor executor = (JavascriptExecutor) driver;
 
     private void clickDependingBrowser(WebElement webElement) {
         if (processData.getCurrentBrowser().equals("firefox")) {
@@ -279,7 +278,7 @@ public class PricingCalculatorPage extends AbstractPage {
         ArrayList<String> tabs = new ArrayList<String>(driver.getWindowHandles());
         driver.switchTo().window(tabs.get(1));
 
-        return new TemporaryEmailHomePage(driver, processData, executor);
+        return new TemporaryEmailHomePage(driver, processData);
     }
 
     public PricingCalculatorPage enterEmail() {
@@ -309,7 +308,7 @@ public class PricingCalculatorPage extends AbstractPage {
         ArrayList<String> tabs = new ArrayList<String>(driver.getWindowHandles());
         driver.switchTo().window(tabs.get(1));
 
-        return new TemporaryEmailHomePage(driver, processData, executor);
+        return new TemporaryEmailHomePage(driver, processData);
     }
 
     public boolean checkFieldsCreatedEstimateHasTheSameDataLikeInCalculator(String field1, String field2, String field3, String field4, String field5) {

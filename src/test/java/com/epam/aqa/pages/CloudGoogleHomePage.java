@@ -2,12 +2,10 @@ package com.epam.aqa.pages;
 
 import com.epam.aqa.models.ProcessData;
 import com.epam.aqa.waits.CustomConditions;
-import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
@@ -19,12 +17,8 @@ public class CloudGoogleHomePage extends AbstractPage {
     @FindBy(xpath = "//div[@class='devsite-searchbox']/input")
     private WebElement searchInput;
 
-    public CloudGoogleHomePage(WebDriver driver, ProcessData processData, JavascriptExecutor executor) {
-        super(driver, processData, executor);
-        this.driver = driver;
-        this.processData = processData;
-        this.executor = executor;
-        PageFactory.initElements(driver, this);
+    public CloudGoogleHomePage(WebDriver driver, ProcessData processData) {
+        super(driver, processData);
     }
 
     public CloudGoogleHomePage openPage() {
@@ -50,6 +44,6 @@ public class CloudGoogleHomePage extends AbstractPage {
 
         logger.info("Looking for " + query);
 
-        return new SearchingResultPage(driver, processData, executor);
+        return new SearchingResultPage(driver, processData);
     }
 }

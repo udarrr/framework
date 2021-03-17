@@ -5,9 +5,7 @@ import com.epam.aqa.waits.CustomConditions;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
@@ -41,17 +39,15 @@ public class TemporaryEmailHomePage extends AbstractPage {
         return this;
     }
 
-    public TemporaryEmailHomePage(WebDriver driver, ProcessData processData, JavascriptExecutor executor) {
-        super(driver, processData, executor);
-        this.driver = driver;
-        this.processData = processData;
-        this.executor = executor;
-        PageFactory.initElements(driver, this);
+    public TemporaryEmailHomePage(WebDriver driver, ProcessData processData) {
+        super(driver, processData);
     }
+
+    private final JavascriptExecutor executor = (JavascriptExecutor) driver;
 
     public TemporaryEmailHomePage copyTemporaryEmail() {
         if (processData.getCurrentBrowser().equals("firefox")) {
-            new WebDriverWait(driver,Duration.ofSeconds(WAIT_TIMEOUT_SECONDS)).until(CustomConditions.inputEmailJQueryLoadCompleted());
+            new WebDriverWait(driver, Duration.ofSeconds(WAIT_TIMEOUT_SECONDS)).until(CustomConditions.inputEmailJQueryLoadCompleted());
 
             String temporaryEmail = (String) executor.executeScript("return document.querySelector('#mail_address').value");
             processData.setCurrentEmail(temporaryEmail);
@@ -68,7 +64,7 @@ public class TemporaryEmailHomePage extends AbstractPage {
         ArrayList<String> tabs = new ArrayList<>(driver.getWindowHandles());
         driver.switchTo().window(tabs.get(0));
 
-        return new PricingCalculatorPage(driver, processData, executor);
+        return new PricingCalculatorPage(driver, processData);
     }
 
     public TemporaryEmailHomePage checkLetterInTemporaryEmailBox() {

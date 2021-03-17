@@ -1,7 +1,6 @@
 package com.epam.aqa.tests;
 
 import com.epam.aqa.models.EstimateForm;
-import com.epam.aqa.models.ProcessData;
 import com.epam.aqa.pages.CloudGoogleHomePage;
 import com.epam.aqa.services.EstimateDataCreator;
 import org.testng.Assert;
@@ -14,7 +13,7 @@ public class EstimateFormComputeEngineTests extends CommonConditions {
 
         EstimateForm estimateForm = EstimateDataCreator.getEstimateFormData();
 
-        boolean expectedPriceInCalculatorLikeInEmail = new CloudGoogleHomePage(driver, processData, executor)
+        boolean expectedPriceInCalculatorLikeInEmail = new CloudGoogleHomePage(driver, processData)
                 .openPage()
                 .fillSearchInput(SEARCHING_QUERY)
                 .openPage()
