@@ -39,14 +39,14 @@ public class CloudGoogleHomePage extends AbstractPage {
     }
 
     public SearchingResultPage fillSearchInput(String query) {
+        processData.setCurrentSearchQuery(query);
+
         new WebDriverWait(driver, Duration.ofSeconds(WAIT_TIMEOUT_SECONDS))
                 .until(ExpectedConditions.visibilityOf(searchInput));
 
         searchInput.click();
         searchInput.sendKeys(query);
         searchInput.sendKeys(Keys.ENTER);
-
-        processData.setCurrentSearchQuery(query);
 
         logger.info("Looking for " + query);
 
