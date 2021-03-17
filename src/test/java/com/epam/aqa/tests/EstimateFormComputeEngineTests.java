@@ -10,11 +10,13 @@ import org.testng.annotations.Test;
 public class EstimateFormComputeEngineTests extends CommonConditions {
     @Test(description = "Hardcore")
     public void createEstimateAndComparePriceCalculatorWithSentByEmail() {
+        String SEARCHING_QUERY = "Google Cloud Platform Pricing Calculator";
+
         EstimateForm estimateForm = EstimateDataCreator.getEstimateFormData();
 
         boolean expectedPriceInCalculatorLikeInEmail = new CloudGoogleHomePage(driver, processData, executor)
                 .openPage()
-                .fillSearchInput()
+                .fillSearchInput(SEARCHING_QUERY)
                 .openPage()
                 .chooseComputerEngine()
                 .fillInputNumberInstances(estimateForm.getQuantityInstances())

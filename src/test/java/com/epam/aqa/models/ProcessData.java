@@ -4,6 +4,7 @@ public class ProcessData {
     protected String currentPriceInCalculator;
     protected String currentEmail;
     protected String currentBrowser;
+    protected String currentSearchQuery;
 
     public String getCurrentPriceInCalculator() {
         return currentPriceInCalculator;
@@ -27,5 +28,13 @@ public class ProcessData {
 
     public void setCurrentBrowser(String currentBrowser) {
         this.currentBrowser = currentBrowser;
+    }
+
+    public String getCurrentSearchQuery() {
+        return currentSearchQuery;
+    }
+
+    public void setCurrentSearchQuery(String currentSearchQuery) {
+        this.currentSearchQuery = currentSearchQuery;
     }
 }

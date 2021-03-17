@@ -15,7 +15,6 @@ import java.time.Duration;
 
 public class CloudGoogleHomePage extends AbstractPage {
     private static final String HOME_PAGE_URL = "https://cloud.google.com/";
-    private static final String SEARCHING_INFO = "Google Cloud Platform Pricing Calculator";
 
     @FindBy(xpath = "//div[@class='devsite-searchbox']/input")
     private WebElement searchInput;
@@ -39,15 +38,17 @@ public class CloudGoogleHomePage extends AbstractPage {
         return this;
     }
 
-    public SearchingResultPage fillSearchInput() {
+    public SearchingResultPage fillSearchInput(String query) {
         new WebDriverWait(driver, Duration.ofSeconds(WAIT_TIMEOUT_SECONDS))
                 .until(ExpectedConditions.visibilityOf(searchInput));
 
         searchInput.click();
-        searchInput.sendKeys(SEARCHING_INFO);
+        searchInput.sendKeys(query);
         searchInput.sendKeys(Keys.ENTER);
 
-        logger.info("Looking for " + SEARCHING_INFO);
+        processData.setCurrentSearchQuery(query);
+
+        logger.info("Looking for " + query);
 
         return new SearchingResultPage(driver, processData, executor);
     }
