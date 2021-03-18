@@ -43,17 +43,13 @@ public class TemporaryEmailHomePage extends AbstractPage {
         super(driver, processData);
     }
 
-    private final JavascriptExecutor executor = (JavascriptExecutor) driver;
-
     public TemporaryEmailHomePage copyTemporaryEmail() {
-        if (processData.getCurrentBrowser().equals("firefox")) {
-            new WebDriverWait(driver, Duration.ofSeconds(WAIT_TIMEOUT_SECONDS)).until(CustomConditions.inputEmailJQueryLoadCompleted());
+        JavascriptExecutor executor = (JavascriptExecutor) driver;
 
-            String temporaryEmail = (String) executor.executeScript("return document.querySelector('#mail_address').value");
-            processData.setCurrentEmail(temporaryEmail);
-        } else {
-            iconCopyEmail.click();
-        }
+        new WebDriverWait(driver, Duration.ofSeconds(WAIT_TIMEOUT_SECONDS)).until(CustomConditions.inputEmailJQueryLoadCompleted());
+
+        String temporaryEmail = (String) executor.executeScript("return document.querySelector('#mail_address').value");
+        processData.setCurrentEmail(temporaryEmail);
 
         logger.info("Email copied");
 
@@ -76,9 +72,8 @@ public class TemporaryEmailHomePage extends AbstractPage {
         return this;
     }
 
-    public boolean compareCalculatorTotalPriceResultHasTheSamePriceLikeInTemporaryEmailLetter() {
-        String priceInEmail = fieldTotalPriceEstimateBill.getText();
+    public String totalPriceInTemporaryEmailLetter() {
 
-        return processData.getCurrentPriceInCalculator().contains(priceInEmail);
+        return fieldTotalPriceEstimateBill.getText();
     }
 }

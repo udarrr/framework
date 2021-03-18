@@ -13,7 +13,7 @@ public class EstimateFormComputeEngineTests extends CommonConditions {
 
         EstimateForm estimateForm = EstimateDataCreator.getEstimateFormData();
 
-        boolean expectedPriceInCalculatorLikeInEmail = new CloudGoogleHomePage(driver, processData)
+        String totalPriceInTemporaryEmailLetter = new CloudGoogleHomePage(driver, processData)
                 .openPage()
                 .fillSearchInput(SEARCHING_QUERY)
                 .openPage()
@@ -38,7 +38,9 @@ public class EstimateFormComputeEngineTests extends CommonConditions {
                 .pressButtonSendEmail()
                 .switchTabToTemporaryEmailHomePage()
                 .checkLetterInTemporaryEmailBox()
-                .compareCalculatorTotalPriceResultHasTheSamePriceLikeInTemporaryEmailLetter();
+                .totalPriceInTemporaryEmailLetter();
+
+        boolean expectedPriceInCalculatorLikeInEmail = processData.getCurrentPriceInCalculator().contains(totalPriceInTemporaryEmailLetter);
 
         Assert.assertTrue(expectedPriceInCalculatorLikeInEmail, "Price in letter don't have the same value like in calculator");
     }
