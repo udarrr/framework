@@ -15,12 +15,8 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-public class PricingCalculatorPage extends AbstractPage {
-    @FindBy(css = "#cloud-site > devsite-iframe > iframe")
-    private WebElement iFrame;
-
-    @FindBy(css = "#myFrame")
-    private WebElement iFrameCalculatorForm;
+public class PricingCalculatorPageFrame extends AbstractPage {
+    private static final String HOME_PAGE_URL = "https://cloudpricingcalculator.appspot.com";
 
     @FindBy(xpath = "//md-tab-item/div[@title='Compute Engine' and @class='tab-holder compute']")
     private WebElement computerEngineForm;
@@ -80,12 +76,12 @@ public class PricingCalculatorPage extends AbstractPage {
 
     String partOfLocatorForPositionDropDownList = "//div[contains(@class,'md-active md-clickable')]//md-option[@value='%s']";
 
-    public PricingCalculatorPage(WebDriver driver, ProcessData processData) {
+    public PricingCalculatorPageFrame(WebDriver driver, ProcessData processData) {
         super(driver, processData);
     }
 
     @Override
-    protected PricingCalculatorPage openPage() {
+    protected PricingCalculatorPageFrame openPage() {
         new WebDriverWait(driver, Duration.ofSeconds(WAIT_TIMEOUT_SECONDS)).withMessage("javascript didn't load")
                 .until(CustomConditions.jsLoadCompleted());
 
@@ -94,18 +90,13 @@ public class PricingCalculatorPage extends AbstractPage {
         return this;
     }
 
-    public PricingCalculatorPage chooseComputerEngine() {
-        new WebDriverWait(driver, Duration.ofSeconds(WAIT_TIMEOUT_SECONDS)).until(ExpectedConditions.visibilityOf(iFrame));
-
-        driver.switchTo().frame(iFrame);
-        driver.switchTo().frame(iFrameCalculatorForm);
-
+    public PricingCalculatorPageFrame chooseComputerEngineForm() {
         computerEngineForm.click();
 
         return this;
     }
 
-    public PricingCalculatorPage fillInputNumberInstances(String number) {
+    public PricingCalculatorPageFrame fillInputNumberInstances(String number) {
         inputNumberInstances.click();
         inputNumberInstances.sendKeys(number);
 
@@ -114,9 +105,6 @@ public class PricingCalculatorPage extends AbstractPage {
         return this;
     }
 
-    private final JavascriptExecutor executor = (JavascriptExecutor) driver;
-
-
     public WebElement buildFullLocatorForPositionMenu(String condition) {
         String fullLocator = String.format(partOfLocatorForPositionDropDownList, condition);
 
@@ -124,7 +112,7 @@ public class PricingCalculatorPage extends AbstractPage {
     }
 
 
-    public PricingCalculatorPage chooseOperationSystem(String condition) {
+    public PricingCalculatorPageFrame chooseOperationSystem(String condition) {
         JavascriptUtils.clickDependingBrowser(inputContainerTypeOperationSystem, processData.getCurrentBrowser(), driver);
 
         String fullLocator = String.format(partOfLocatorForPositionDropDownList, condition);
@@ -137,7 +125,7 @@ public class PricingCalculatorPage extends AbstractPage {
         return this;
     }
 
-    public PricingCalculatorPage chooseMachineClass(String machineClass) {
+    public PricingCalculatorPageFrame chooseMachineClass(String machineClass) {
         JavascriptUtils.clickDependingBrowser(inputContainerMachineClass, processData.getCurrentBrowser(), driver);
 
         WebElement position = buildFullLocatorForPositionMenu(machineClass);
@@ -148,7 +136,7 @@ public class PricingCalculatorPage extends AbstractPage {
         return this;
     }
 
-    public PricingCalculatorPage chooseSeries(String series) {
+    public PricingCalculatorPageFrame chooseSeries(String series) {
         JavascriptUtils.clickDependingBrowser(inputContainerSeries, processData.getCurrentBrowser(), driver);
 
         WebElement position = buildFullLocatorForPositionMenu(series);
@@ -159,7 +147,7 @@ public class PricingCalculatorPage extends AbstractPage {
         return this;
     }
 
-    public PricingCalculatorPage chooseMachineType(String type) {
+    public PricingCalculatorPageFrame chooseMachineType(String type) {
         JavascriptUtils.clickDependingBrowser(inputContainerMachineType, processData.getCurrentBrowser(), driver);
 
         WebElement position = buildFullLocatorForPositionMenu(type);
@@ -170,7 +158,7 @@ public class PricingCalculatorPage extends AbstractPage {
         return this;
     }
 
-    public PricingCalculatorPage addGPUs(String number, String type) {
+    public PricingCalculatorPageFrame addGPUs(String number, String type) {
         JavascriptUtils.clickDependingBrowser(checkBoxAddGPU, processData.getCurrentBrowser(), driver);
 
         CustomWaits.waitBeforeChoosingMenuOption(inputContainerGPUNumber, driver, WAIT_TIMEOUT_SECONDS);
@@ -190,7 +178,7 @@ public class PricingCalculatorPage extends AbstractPage {
         return this;
     }
 
-    public PricingCalculatorPage chooseLocalSSD(String count) {
+    public PricingCalculatorPageFrame chooseLocalSSD(String count) {
         CustomWaits.waitBeforeChoosingMenuOption(inputContainerLocalSSD, driver, WAIT_TIMEOUT_SECONDS);
         JavascriptUtils.clickDependingBrowser(inputContainerLocalSSD, processData.getCurrentBrowser(), driver);
 
@@ -202,7 +190,7 @@ public class PricingCalculatorPage extends AbstractPage {
         return this;
     }
 
-    public PricingCalculatorPage chooseDataCenterLocation(String location) {
+    public PricingCalculatorPageFrame chooseDataCenterLocation(String location) {
         JavascriptUtils.clickDependingBrowser(inputContainerDataCenterLocation, processData.getCurrentBrowser(), driver);
 
         WebElement position = buildFullLocatorForPositionMenu(location);
@@ -213,7 +201,7 @@ public class PricingCalculatorPage extends AbstractPage {
         return this;
     }
 
-    public PricingCalculatorPage chooseCommittedUsage(String period) {
+    public PricingCalculatorPageFrame chooseCommittedUsage(String period) {
         JavascriptUtils.clickDependingBrowser(inputContainerCommittedUsage, processData.getCurrentBrowser(), driver);
 
         WebElement position = buildFullLocatorForPositionMenu(period);
@@ -224,7 +212,7 @@ public class PricingCalculatorPage extends AbstractPage {
         return this;
     }
 
-    public PricingCalculatorPage pressButtonAddToEstimate() {
+    public PricingCalculatorPageFrame pressButtonAddToEstimate() {
         JavascriptUtils.clickDependingBrowser(buttonAddToEstimate, processData.getCurrentBrowser(), driver);
 
         logger.info("Pressed button add estimate");
@@ -232,13 +220,13 @@ public class PricingCalculatorPage extends AbstractPage {
         return this;
     }
 
-    public PricingCalculatorPage saveCalculatorTotalPriceResult() {
+    public PricingCalculatorPageFrame saveCalculatorTotalPriceResult() {
         processData.setCurrentPriceInCalculator(totalEstimatedCost.getText());
 
         return this;
     }
 
-    public PricingCalculatorPage pressButtonEmailEstimate() {
+    public PricingCalculatorPageFrame pressButtonEmailEstimate() {
         buttonEmailEstimate.click();
 
         new WebDriverWait(driver, Duration.ofSeconds(WAIT_TIMEOUT_SECONDS)).until(ExpectedConditions.visibilityOf(inputEmail));
@@ -254,10 +242,7 @@ public class PricingCalculatorPage extends AbstractPage {
         return new TemporaryEmailHomePage(driver, processData);
     }
 
-    public PricingCalculatorPage enterEmail() {
-        driver.switchTo().frame(iFrame);
-        driver.switchTo().frame(iFrameCalculatorForm);
-
+    public PricingCalculatorPageFrame enterEmail() {
         inputEmail.sendKeys(processData.getCurrentEmail());
 
         logger.info("Email wrote down");
@@ -265,7 +250,7 @@ public class PricingCalculatorPage extends AbstractPage {
         return this;
     }
 
-    public PricingCalculatorPage pressButtonSendEmail() {
+    public PricingCalculatorPageFrame pressButtonSendEmail() {
         JavascriptUtils.clickDependingBrowser(buttonSendEmail, processData.getCurrentBrowser(), driver);
 
         logger.info("Email sent");

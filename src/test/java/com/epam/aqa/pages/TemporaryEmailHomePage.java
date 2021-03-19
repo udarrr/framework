@@ -1,8 +1,8 @@
 package com.epam.aqa.pages;
 
 import com.epam.aqa.models.ProcessData;
+import com.epam.aqa.utils.JavascriptUtils;
 import com.epam.aqa.waits.CustomConditions;
-import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -25,8 +25,7 @@ public class TemporaryEmailHomePage extends AbstractPage {
     @FindBy(xpath = "//*[@id='mobilepadding']//td[2]/h3")
     private WebElement fieldTotalPriceEstimateBill;
 
-    @FindBy(id = "mail_address")
-    private WebElement inputEmailAddress;
+    private final String inputEmailAddress = "mail_address";
 
     @Override
     public TemporaryEmailHomePage openPage() {
@@ -44,11 +43,10 @@ public class TemporaryEmailHomePage extends AbstractPage {
     }
 
     public TemporaryEmailHomePage copyTemporaryEmail() {
-        JavascriptExecutor executor = (JavascriptExecutor) driver;
+        new WebDriverWait(driver, Duration.ofSeconds(WAIT_TIMEOUT_SECONDS))
+                .until(CustomConditions.inputEmailJQueryLoadCompleted());
 
-        new WebDriverWait(driver, Duration.ofSeconds(WAIT_TIMEOUT_SECONDS)).until(CustomConditions.inputEmailJQueryLoadCompleted());
-
-        String temporaryEmail = (String) executor.executeScript("return document.querySelector('#mail_address').value");
+        String temporaryEmail = JavascriptUtils.getValueByLocatorThroughJSExecutor(driver, inputEmailAddress);
         processData.setCurrentEmail(temporaryEmail);
 
         logger.info("Email copied");
@@ -56,11 +54,11 @@ public class TemporaryEmailHomePage extends AbstractPage {
         return this;
     }
 
-    public PricingCalculatorPage comeBackToCalculator() {
+    public PricingCalculatorPageFrame comeBackToCalculator() {
         ArrayList<String> tabs = new ArrayList<>(driver.getWindowHandles());
         driver.switchTo().window(tabs.get(0));
 
-        return new PricingCalculatorPage(driver, processData);
+        return new PricingCalculatorPageFrame(driver, processData);
     }
 
     public TemporaryEmailHomePage checkLetterInTemporaryEmailBox() {

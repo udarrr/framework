@@ -32,7 +32,7 @@ public class CloudGoogleHomePage extends AbstractPage {
         return this;
     }
 
-    public SearchingResultPage fillSearchInput(String query) {
+    public CloudGooglePageWithSearchingResultFrame fillSearchInput(String query) {
         processData.setCurrentSearchQuery(query);
 
         new WebDriverWait(driver, Duration.ofSeconds(WAIT_TIMEOUT_SECONDS))
@@ -44,6 +44,6 @@ public class CloudGoogleHomePage extends AbstractPage {
 
         logger.info("Looking for " + query);
 
-        return new SearchingResultPage(driver, processData);
+        return new CloudGooglePageWithSearchingResultFrame(driver, processData);
     }
 }

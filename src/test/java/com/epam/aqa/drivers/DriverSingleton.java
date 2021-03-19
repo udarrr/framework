@@ -11,6 +11,8 @@ import org.openqa.selenium.firefox.FirefoxOptions;
 
 public class DriverSingleton {
     private static WebDriver driver;
+    private static final String HEADLESS_ARGUMENT = "--headless";
+    private static final String RESOLUTION_ARGUMENT = "--window-size=1920,1080";
 
     public static WebDriver getDriver() {
         if (driver == null) {
@@ -19,7 +21,7 @@ public class DriverSingleton {
                     WebDriverManager.firefoxdriver().setup();
 
                     if (System.getProperty("mode").equals("headless")) {
-                        driver = new FirefoxDriver(new FirefoxOptions().addArguments("--headless" , "--window-size=1920,1080"));
+                        driver = new FirefoxDriver(new FirefoxOptions().addArguments(HEADLESS_ARGUMENT,RESOLUTION_ARGUMENT));
                     } else {
                         driver = new FirefoxDriver();
                     }
@@ -29,7 +31,7 @@ public class DriverSingleton {
                     WebDriverManager.edgedriver().setup();
 
                     if (System.getProperty("mode").equals("headless")) {
-                        driver = new EdgeDriver(new EdgeOptions().addArguments("--headless" , "--window-size=1920,1080"));
+                        driver = new EdgeDriver(new EdgeOptions().addArguments(HEADLESS_ARGUMENT,RESOLUTION_ARGUMENT));
                     } else {
                         driver = new EdgeDriver();
                     }
@@ -39,7 +41,7 @@ public class DriverSingleton {
                     WebDriverManager.chromedriver().setup();
 
                     if (System.getProperty("mode").equals("headless")) {
-                        driver = new ChromeDriver(new ChromeOptions().addArguments("--headless" , "--window-size=1920,1080"));
+                        driver = new ChromeDriver(new ChromeOptions().addArguments(HEADLESS_ARGUMENT,RESOLUTION_ARGUMENT));
                     } else {
                         driver = new ChromeDriver();
                     }
