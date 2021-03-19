@@ -22,13 +22,10 @@ public class JavascriptUtils {
         return (String) executor.executeScript(script);
     }
 
-    public static ArrayList<String> openTab(WebDriver driver) {
+    public static int createTab(WebDriver driver) {
         ((JavascriptExecutor) driver).executeScript("window.open()");
 
-        return new ArrayList<>(driver.getWindowHandles());
+        return driver.getWindowHandles().size() - 1;
     }
 
-    public static ArrayList<String> getCurrentTabs(WebDriver driver) {
-        return new ArrayList<>(driver.getWindowHandles());
-    }
 }

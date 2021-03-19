@@ -3,6 +3,7 @@ package com.epam.aqa.pages;
 import com.epam.aqa.models.EstimateResult;
 import com.epam.aqa.models.ProcessData;
 import com.epam.aqa.utils.JavascriptUtils;
+import com.epam.aqa.utils.TabsUtils;
 import com.epam.aqa.waits.CustomConditions;
 import com.epam.aqa.waits.CustomWaits;
 import org.openqa.selenium.*;
@@ -236,8 +237,8 @@ public class PricingCalculatorPageFrame extends AbstractPage {
         return this;
     }
 
-    public TemporaryEmailHomePage openNewTab() {
-        driver.switchTo().window(JavascriptUtils.openTab(driver).get(1));
+    public TemporaryEmailHomePage openTemporaryEmailTab(int tabIndex) {
+        driver.switchTo().window(TabsUtils.getCurrentTabs(driver).get(tabIndex));
 
         return new TemporaryEmailHomePage(driver, processData);
     }
@@ -256,12 +257,6 @@ public class PricingCalculatorPageFrame extends AbstractPage {
         logger.info("Email sent");
 
         return this;
-    }
-
-    public TemporaryEmailHomePage switchTabToTemporaryEmailHomePage() {
-        driver.switchTo().window(JavascriptUtils.getCurrentTabs(driver).get(1));
-
-        return new TemporaryEmailHomePage(driver, processData);
     }
 
     public boolean checkFieldsCreatedEstimateHasTheSameDataLikeInCalculator(String field1, String field2, String field3, String field4, String field5) {

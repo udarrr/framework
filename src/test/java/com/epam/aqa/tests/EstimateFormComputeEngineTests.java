@@ -2,18 +2,19 @@ package com.epam.aqa.tests;
 
 import com.epam.aqa.models.EstimateForm;
 import com.epam.aqa.pages.CloudGoogleHomePage;
+import com.epam.aqa.pages.PricingCalculatorPageFrame;
 import com.epam.aqa.services.EstimateDataCreator;
+import com.epam.aqa.utils.JavascriptUtils;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
 public class EstimateFormComputeEngineTests extends CommonConditions {
     @Test(description = "Hardcore")
     public void createEstimateAndComparePriceCalculatorWithSentByEmail() {
+        EstimateForm estimateForm = EstimateDataCreator.getEstimateFormData();
         String SEARCHING_QUERY = "Google Cloud Platform Pricing Calculator";
 
-        EstimateForm estimateForm = EstimateDataCreator.getEstimateFormData();
-
-        String totalPriceInTemporaryEmailLetter = new CloudGoogleHomePage(driver, processData)
+        PricingCalculatorPageFrame pricingCalculatorPageFrame = new CloudGoogleHomePage(driver, processData)
                 .openPage()
                 .fillSearchInput(SEARCHING_QUERY)
                 .openPage()
@@ -31,14 +32,18 @@ public class EstimateFormComputeEngineTests extends CommonConditions {
                 .chooseCommittedUsage(estimateForm.getCommittedUsageID())
                 .pressButtonAddToEstimate()
                 .saveCalculatorTotalPriceResult()
-                .pressButtonEmailEstimate()
-                .openNewTab()
+                .pressButtonEmailEstimate();
+
+       int indexTemporaryEmailTab = JavascriptUtils.createTab(driver);
+
+        String totalPriceInTemporaryEmailLetter = pricingCalculatorPageFrame
+                .openTemporaryEmailTab(indexTemporaryEmailTab)
                 .openPage()
                 .copyTemporaryEmail()
-                .comeBackToCalculator()
+                .openPricingCalculatorTab(0)
                 .enterEmail()
                 .pressButtonSendEmail()
-                .switchTabToTemporaryEmailHomePage()
+                .openTemporaryEmailTab(indexTemporaryEmailTab)
                 .checkLetterInTemporaryEmailBox()
                 .totalPriceInTemporaryEmailLetter();
 

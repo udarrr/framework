@@ -2,6 +2,7 @@ package com.epam.aqa.pages;
 
 import com.epam.aqa.models.ProcessData;
 import com.epam.aqa.utils.JavascriptUtils;
+import com.epam.aqa.utils.TabsUtils;
 import com.epam.aqa.waits.CustomConditions;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -54,8 +55,8 @@ public class TemporaryEmailHomePage extends AbstractPage {
         return this;
     }
 
-    public PricingCalculatorPageFrame comeBackToCalculator() {
-        driver.switchTo().window(JavascriptUtils.getCurrentTabs(driver).get(0));
+    public PricingCalculatorPageFrame openPricingCalculatorTab(int tabIndex) {
+        driver.switchTo().window(TabsUtils.getCurrentTabs(driver).get(tabIndex));
 
         return new PricingCalculatorPageFrame(driver, processData);
     }
