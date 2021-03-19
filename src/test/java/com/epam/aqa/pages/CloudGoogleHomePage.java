@@ -21,6 +21,7 @@ public class CloudGoogleHomePage extends AbstractPage {
         super(driver, processData);
     }
 
+    @Override
     public CloudGoogleHomePage openPage() {
         driver.get(HOME_PAGE_URL);
 

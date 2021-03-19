@@ -34,21 +34,21 @@ public class EstimateFormComputeEngineTests extends CommonConditions {
                 .saveCalculatorTotalPriceResult()
                 .pressButtonEmailEstimate();
 
-       int indexTemporaryEmailTab = JavascriptUtils.createTab(driver);
+        int indexTabPricingCalculator = 0;
+        int indexTabTemporaryEmail = JavascriptUtils.createTab(driver);
 
         String totalPriceInTemporaryEmailLetter = pricingCalculatorPageFrame
-                .openTemporaryEmailTab(indexTemporaryEmailTab)
+                .openTemporaryEmailTab(indexTabTemporaryEmail)
                 .openPage()
                 .copyTemporaryEmail()
-                .openPricingCalculatorTab(0)
+                .openPricingCalculatorTab(indexTabPricingCalculator)
                 .enterEmail()
                 .pressButtonSendEmail()
-                .openTemporaryEmailTab(indexTemporaryEmailTab)
+                .openTemporaryEmailTab(indexTabTemporaryEmail)
                 .checkLetterInTemporaryEmailBox()
                 .totalPriceInTemporaryEmailLetter();
 
-        boolean expectedPriceInCalculatorLikeInEmail = processData.getCurrentPriceInCalculator().contains(totalPriceInTemporaryEmailLetter);
-
-        Assert.assertTrue(expectedPriceInCalculatorLikeInEmail, "Price in letter don't have the same value like in calculator");
+        Assert.assertTrue(processData.getCurrentPriceInCalculator().contains(totalPriceInTemporaryEmailLetter),
+                "Price in letter don't have the same value like in calculator");
     }
 }

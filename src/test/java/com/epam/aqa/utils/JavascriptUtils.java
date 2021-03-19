@@ -4,8 +4,6 @@ import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
-import java.util.ArrayList;
-
 public class JavascriptUtils {
     public static void clickDependingBrowser(WebDriver driver, WebElement element, String browser) {
         if (browser.equals("firefox")) {
