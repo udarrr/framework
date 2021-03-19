@@ -113,12 +113,12 @@ public class PricingCalculatorPageFrame extends AbstractPage {
 
 
     public PricingCalculatorPageFrame chooseOperationSystem(String condition) {
-        JavascriptUtils.clickDependingBrowser(inputContainerTypeOperationSystem, processData.getCurrentBrowser(), driver);
+        JavascriptUtils.clickDependingBrowser(driver, inputContainerTypeOperationSystem, processData.getCurrentBrowser());
 
         String fullLocator = String.format(partOfLocatorForPositionDropDownList, condition);
 
         WebElement position = CustomWaits.waitBeforeChoosingMenuOption(fullLocator, driver, WAIT_TIMEOUT_SECONDS);
-        JavascriptUtils.clickDependingBrowser(position, processData.getCurrentBrowser(), driver);
+        JavascriptUtils.clickDependingBrowser(driver, position, processData.getCurrentBrowser());
 
         logger.info("Chose operation system " + condition);
 
@@ -126,10 +126,10 @@ public class PricingCalculatorPageFrame extends AbstractPage {
     }
 
     public PricingCalculatorPageFrame chooseMachineClass(String machineClass) {
-        JavascriptUtils.clickDependingBrowser(inputContainerMachineClass, processData.getCurrentBrowser(), driver);
+        JavascriptUtils.clickDependingBrowser(driver, inputContainerMachineClass, processData.getCurrentBrowser());
 
         WebElement position = buildFullLocatorForPositionMenu(machineClass);
-        JavascriptUtils.clickDependingBrowser(position, processData.getCurrentBrowser(), driver);
+        JavascriptUtils.clickDependingBrowser(driver, position, processData.getCurrentBrowser());
 
         logger.info("Chose machine class " + machineClass);
 
@@ -137,10 +137,10 @@ public class PricingCalculatorPageFrame extends AbstractPage {
     }
 
     public PricingCalculatorPageFrame chooseSeries(String series) {
-        JavascriptUtils.clickDependingBrowser(inputContainerSeries, processData.getCurrentBrowser(), driver);
+        JavascriptUtils.clickDependingBrowser(driver, inputContainerSeries, processData.getCurrentBrowser());
 
         WebElement position = buildFullLocatorForPositionMenu(series);
-        JavascriptUtils.clickDependingBrowser(position, processData.getCurrentBrowser(), driver);
+        JavascriptUtils.clickDependingBrowser(driver, position, processData.getCurrentBrowser());
 
         logger.info("Chose series class " + series);
 
@@ -148,10 +148,10 @@ public class PricingCalculatorPageFrame extends AbstractPage {
     }
 
     public PricingCalculatorPageFrame chooseMachineType(String type) {
-        JavascriptUtils.clickDependingBrowser(inputContainerMachineType, processData.getCurrentBrowser(), driver);
+        JavascriptUtils.clickDependingBrowser(driver, inputContainerMachineType, processData.getCurrentBrowser());
 
         WebElement position = buildFullLocatorForPositionMenu(type);
-        JavascriptUtils.clickDependingBrowser(position, processData.getCurrentBrowser(), driver);
+        JavascriptUtils.clickDependingBrowser(driver, position, processData.getCurrentBrowser());
 
         logger.info("Chose machine type " + type);
 
@@ -159,19 +159,19 @@ public class PricingCalculatorPageFrame extends AbstractPage {
     }
 
     public PricingCalculatorPageFrame addGPUs(String number, String type) {
-        JavascriptUtils.clickDependingBrowser(checkBoxAddGPU, processData.getCurrentBrowser(), driver);
+        JavascriptUtils.clickDependingBrowser(driver, checkBoxAddGPU, processData.getCurrentBrowser());
 
         CustomWaits.waitBeforeChoosingMenuOption(inputContainerGPUNumber, driver, WAIT_TIMEOUT_SECONDS);
-        JavascriptUtils.clickDependingBrowser(inputContainerGPUNumber, processData.getCurrentBrowser(), driver);
+        JavascriptUtils.clickDependingBrowser(driver, inputContainerGPUNumber, processData.getCurrentBrowser());
 
         WebElement positionNumber = buildFullLocatorForPositionMenu(number);
-        JavascriptUtils.clickDependingBrowser(positionNumber, processData.getCurrentBrowser(), driver);
+        JavascriptUtils.clickDependingBrowser(driver, positionNumber, processData.getCurrentBrowser());
 
         CustomWaits.waitBeforeChoosingMenuOption(inputContainerGPUType, driver, WAIT_TIMEOUT_SECONDS);
-        JavascriptUtils.clickDependingBrowser(inputContainerGPUType, processData.getCurrentBrowser(), driver);
+        JavascriptUtils.clickDependingBrowser(driver, inputContainerGPUType, processData.getCurrentBrowser());
 
         WebElement positionType = buildFullLocatorForPositionMenu(type);
-        JavascriptUtils.clickDependingBrowser(positionType, processData.getCurrentBrowser(), driver);
+        JavascriptUtils.clickDependingBrowser(driver, positionType, processData.getCurrentBrowser());
 
         logger.info("Add gpu " + number + "and" + type);
 
@@ -180,10 +180,10 @@ public class PricingCalculatorPageFrame extends AbstractPage {
 
     public PricingCalculatorPageFrame chooseLocalSSD(String count) {
         CustomWaits.waitBeforeChoosingMenuOption(inputContainerLocalSSD, driver, WAIT_TIMEOUT_SECONDS);
-        JavascriptUtils.clickDependingBrowser(inputContainerLocalSSD, processData.getCurrentBrowser(), driver);
+        JavascriptUtils.clickDependingBrowser(driver, inputContainerLocalSSD, processData.getCurrentBrowser());
 
         WebElement position = buildFullLocatorForPositionMenu(count);
-        JavascriptUtils.clickDependingBrowser(position, processData.getCurrentBrowser(), driver);
+        JavascriptUtils.clickDependingBrowser(driver, position, processData.getCurrentBrowser());
 
         logger.info("Chose local SSD count " + count);
 
@@ -191,10 +191,10 @@ public class PricingCalculatorPageFrame extends AbstractPage {
     }
 
     public PricingCalculatorPageFrame chooseDataCenterLocation(String location) {
-        JavascriptUtils.clickDependingBrowser(inputContainerDataCenterLocation, processData.getCurrentBrowser(), driver);
+        JavascriptUtils.clickDependingBrowser(driver, inputContainerDataCenterLocation, processData.getCurrentBrowser());
 
         WebElement position = buildFullLocatorForPositionMenu(location);
-        JavascriptUtils.clickDependingBrowser(position, processData.getCurrentBrowser(), driver);
+        JavascriptUtils.clickDependingBrowser(driver, position, processData.getCurrentBrowser());
 
         logger.info("Chose datacenter location " + location);
 
@@ -202,10 +202,10 @@ public class PricingCalculatorPageFrame extends AbstractPage {
     }
 
     public PricingCalculatorPageFrame chooseCommittedUsage(String period) {
-        JavascriptUtils.clickDependingBrowser(inputContainerCommittedUsage, processData.getCurrentBrowser(), driver);
+        JavascriptUtils.clickDependingBrowser(driver, inputContainerCommittedUsage, processData.getCurrentBrowser());
 
         WebElement position = buildFullLocatorForPositionMenu(period);
-        JavascriptUtils.clickDependingBrowser(position, processData.getCurrentBrowser(), driver);
+        JavascriptUtils.clickDependingBrowser(driver, position, processData.getCurrentBrowser());
 
         logger.info("Chose committed usage " + period);
 
@@ -213,7 +213,7 @@ public class PricingCalculatorPageFrame extends AbstractPage {
     }
 
     public PricingCalculatorPageFrame pressButtonAddToEstimate() {
-        JavascriptUtils.clickDependingBrowser(buttonAddToEstimate, processData.getCurrentBrowser(), driver);
+        JavascriptUtils.clickDependingBrowser(driver, buttonAddToEstimate, processData.getCurrentBrowser());
 
         logger.info("Pressed button add estimate");
 
@@ -251,7 +251,7 @@ public class PricingCalculatorPageFrame extends AbstractPage {
     }
 
     public PricingCalculatorPageFrame pressButtonSendEmail() {
-        JavascriptUtils.clickDependingBrowser(buttonSendEmail, processData.getCurrentBrowser(), driver);
+        JavascriptUtils.clickDependingBrowser(driver, buttonSendEmail, processData.getCurrentBrowser());
 
         logger.info("Email sent");
 

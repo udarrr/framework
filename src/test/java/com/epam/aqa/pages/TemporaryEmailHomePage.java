@@ -25,7 +25,7 @@ public class TemporaryEmailHomePage extends AbstractPage {
     @FindBy(xpath = "//*[@id='mobilepadding']//td[2]/h3")
     private WebElement fieldTotalPriceEstimateBill;
 
-    private final String inputEmailAddress = "mail_address";
+    private final String inputIDEmailAddress = "mail_address";
 
     @Override
     public TemporaryEmailHomePage openPage() {
@@ -46,7 +46,7 @@ public class TemporaryEmailHomePage extends AbstractPage {
         new WebDriverWait(driver, Duration.ofSeconds(WAIT_TIMEOUT_SECONDS))
                 .until(CustomConditions.inputEmailJQueryLoadCompleted());
 
-        String temporaryEmail = JavascriptUtils.getValueByLocatorThroughJSExecutor(driver, inputEmailAddress);
+        String temporaryEmail = JavascriptUtils.getValueByLocatorThroughJSExecutor(driver, inputIDEmailAddress);
         processData.setCurrentEmail(temporaryEmail);
 
         logger.info("Email copied");
@@ -55,8 +55,7 @@ public class TemporaryEmailHomePage extends AbstractPage {
     }
 
     public PricingCalculatorPageFrame comeBackToCalculator() {
-        ArrayList<String> tabs = new ArrayList<>(driver.getWindowHandles());
-        driver.switchTo().window(tabs.get(0));
+        driver.switchTo().window(JavascriptUtils.getCurrentTabs(driver).get(0));
 
         return new PricingCalculatorPageFrame(driver, processData);
     }
